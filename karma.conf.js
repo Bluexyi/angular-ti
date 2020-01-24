@@ -26,11 +26,11 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: true,
 
-    browsers: ['Chrome_no_sandbox'],customLaunchers: {  Chrome_no_sandbox: {    base: 'Chrome',    flags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222', '--single-run']  }}
+    browsers: ['Chrome_no_sandbox'],customLaunchers: {  Chrome_no_sandbox: {    base: 'Chrome',    flags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222']  }}
 
   });
 
