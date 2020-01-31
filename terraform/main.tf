@@ -30,7 +30,7 @@ resource "azurerm_resource_group" "test" {
   name     = "rg-romainlenoir"
   location = "North Europe"
 
-  tags = "${local.tags}"
+  tags = local.tags
 }
 
 # ======================================================================================
@@ -39,8 +39,8 @@ resource "azurerm_resource_group" "test" {
 
 resource "azurerm_container_group" "test" {
   name                = "ci-test-recette"
-  location            = "${azurerm_resource_group.test.location}"
-  resource_group_name = "${azurerm_resource_group.test.name}"
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
   ip_address_type     = "public"
   os_type             = "linux"
   dns_name_label      = "devoir-esgi"
@@ -64,5 +64,5 @@ resource "azurerm_container_group" "test" {
       protocol = "TCP"
     }
   }
-  tags = "${local.tags}"
+  tags = local.tags
 }
