@@ -12,7 +12,7 @@ provider "azurerm" {
   tenant_id       = var.tenant_id
   subscription_id = var.subscription_id
   client_id       = var.client_id
-  client_secret   = var.client_secret
+  client_secret   = var.cl
 }
 
 
@@ -49,7 +49,7 @@ resource "azurerm_container_group" "test" {
 
   container {
     name   = "citestdev"
-    image  = "crtestci.azurecr.io/bluexyi/angular-ti-recectte:latest"
+    image  = "crtestci.azurecr.io/bluexyi/angular-ti-recette:latest"
     cpu    = "1"
     memory = "1.5"
 
