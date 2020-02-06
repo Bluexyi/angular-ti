@@ -15,22 +15,13 @@ provider "azurerm" {
   client_secret   = var.client_secret
 }
 
+
 locals {
   tags = {
     createBy = "Romain Lenoir"
-    project = "Devoir ESGI"
+    project = "aucun"
+    lead = "Romain Lenoir"
   }
-}
-
-# ======================================================================================
-# Ressource Group
-# ======================================================================================
-
-resource "azurerm_resource_group" "test" {
-  name     = "rg-romainlenoir"
-  location = "North Europe"
-
-  tags = local.tags
 }
 
 # ======================================================================================
@@ -38,25 +29,23 @@ resource "azurerm_resource_group" "test" {
 # ======================================================================================
 
 resource "azurerm_container_group" "test" {
-  name                = "ci-test-recette"
-  location            = azurerm_resource_group.test.location
-  resource_group_name = azurerm_resource_group.test.name
+  name                = "ci-test-dev"
+  location            = "North Europe"
+  resource_group_name = "rg-romainlenoir"
   ip_address_type     = "public"
   os_type             = "linux"
-  dns_name_label      = "devoir-esgi"
+  dns_name_label      = "angularti-dev"
 
-  /*
-  //Authentification container registry
   image_registry_credential {
-    server   = "hub.docker.com"
-    username = "yourusername1"
-    password = "yourpassword"
-  }*/
+    server   = var.server
+    username = var.username
+    password = var.password
+  }
 
   container {
-    name   = "front-devoir-esgi"
-    image  = "romainlenoir/front-devoir-cloud-esgi-nginx"
-    cpu    = "0.5"
+    name   = "citestdev"
+    image  = "crtestci.azurecr.io/bluexyi/angular-ti-dev:latest"
+    cpu    = "1"
     memory = "1.5"
 
     ports {
@@ -66,3 +55,5 @@ resource "azurerm_container_group" "test" {
   }
   tags = local.tags
 }
+
+
